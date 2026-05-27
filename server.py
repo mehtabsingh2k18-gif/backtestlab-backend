@@ -16,7 +16,7 @@ HF_BASE_URL = "https://huggingface.co/spaces/mehtab13/backtestlab-data/raw/main"
 def keep_alive_task():
     while True:
         print(f"[{datetime.datetime.now()}] 🕒 Server is alive and running.")
-        time.sleep(60) # Logs every 60 seconds
+        time.sleep(6) # Logs every 6 seconds
 
 # Start the background task
 thread = threading.Thread(target=keep_alive_task, daemon=True)
