@@ -18,7 +18,7 @@ def keep_alive_task():
     while True:
         # The flush=True forces the text to appear in your logs immediately
         print(f"[{datetime.datetime.now()}] 🕒 Server is alive and running.", flush=True)
-        time.sleep(6)
+        time.sleep(30)
 # Start the background task
 thread = threading.Thread(target=keep_alive_task, daemon=True)
 thread.start()
