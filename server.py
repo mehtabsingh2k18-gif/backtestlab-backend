@@ -45,14 +45,14 @@ def get_market_data():
 
     while current_check <= target_end:
         year_str = str(current_check.year)
-        # Match your file names with no leading zero (1.json, 2.json, etc.)
+        # Matches your single-digit month file names (1.json, 2.json, etc.)
         month_str = str(current_check.month)
         
-        # FIXED: Forcing the symbol to lowercase for the path string to match hugging face folders exactly
+        # Lowercase asset symbol folder layout (xauusd)
         symbol_path = symbol.lower()
         
-        # Matches your exact structure layout: /xauusd/h4_2025/2.json
-        block_url = f"{HF_BASE_URL}/{symbol_path}/{tf}_{year_str}/{month_str}.json"
+        # FIXED: Routes through separate nested subfolders: /xauusd/h4/2021/1.json
+        block_url = f"{HF_BASE_URL}/{symbol_path}/{tf}/{year_str}/{month_str}.json"
         print(f"🚀 Middleman downloading block: {block_url}")
 
         try:
