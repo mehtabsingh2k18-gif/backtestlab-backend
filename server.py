@@ -45,10 +45,14 @@ def get_market_data():
 
     while current_check <= target_end:
         year_str = str(current_check.year)
-        month_str = f"{current_check.month:02d}"
+        # Match your file names with no leading zero (1.json, 2.json, etc.)
+        month_str = str(current_check.month)
         
-        # FIXED: Realigned URL to hit your exact subfolder structure layout: /XAUUSD/h4_2025/02.json
-        block_url = f"{HF_BASE_URL}/{symbol}/{tf}_{year_str}/{month_str}.json"
+        # FIXED: Forcing the symbol to lowercase for the path string to match hugging face folders exactly
+        symbol_path = symbol.lower()
+        
+        # Matches your exact structure layout: /xauusd/h4_2025/2.json
+        block_url = f"{HF_BASE_URL}/{symbol_path}/{tf}_{year_str}/{month_str}.json"
         print(f"🚀 Middleman downloading block: {block_url}")
 
         try:
@@ -67,7 +71,7 @@ def get_market_data():
                             elif start_date <= c_date <= end_date:
                                 future_candles.append(candle)
             else:
-                print(f"⚠️ Block not found or inaccessible. HTTP Status: {response.status_code}")
+                print(f"⚠️ Block not found or inaccessible. HTTP Status: {response.status_code} for URL: {block_url}")
         except Exception as e:
             print(f"❌ Exception occurred while requesting block chunk data: {e}")
 
