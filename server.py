@@ -1,6 +1,8 @@
 import os
 import requests
 import datetime
+import threading  # Added for keep-alive
+import time       # Added for keep-alive
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -9,6 +11,17 @@ CORS(app)
 
 # The base path pointing to your Hugging Face space files repository
 HF_BASE_URL = "https://huggingface.co/spaces/mehtab13/backtestlab-data/raw/main"
+
+# --- Keep-Alive Background Task ---
+def keep_alive_task():
+    while True:
+        print(f"[{datetime.datetime.now()}] 🕒 Server is alive and running.")
+        time.sleep(60) # Logs every 60 seconds
+
+# Start the background task
+thread = threading.Thread(target=keep_alive_task, daemon=True)
+thread.start()
+# ----------------------------------
 
 def parse_date(date_str):
     """Safely parse incoming ISO date strings from the frontend workspace."""
@@ -21,6 +34,10 @@ def parse_date(date_str):
     except Exception as e:
         print(f"❌ Date parsing failure for value '{date_str}': {e}")
         return None
+
+@app.route('/', methods=['GET'])
+def home():
+    return "Server is active."
 
 @app.route('/data', methods=['GET'])
 def get_market_data():
