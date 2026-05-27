@@ -16,8 +16,8 @@ CORS(app)
 # CLOUD STORAGE CONFIGURATION
 # ==========================================
 # Replace these values with your exact Hugging Face details
-HF_USERNAME = "YOUR_HF_USERNAME"
-HF_SPACE_NAME = "YOUR_SPACE_NAME"
+HF_USERNAME = "mehtab13"
+HF_SPACE_NAME = "backtestlab-data"
 HF_BASE_URL = f"https://huggingface.co/spaces/{HF_USERNAME}/{HF_SPACE_NAME}/raw/main"
 
 CHUNK_SIZE = 5000
