@@ -7,8 +7,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
-
+CORS(app, resources={r"/*": {"origins": "https://backtestlabpro.com"}})
 # The base path pointing to your Hugging Face space files repository
 HF_BASE_URL = "https://huggingface.co/spaces/mehtab13/backtestlab-data/raw/main"
 
