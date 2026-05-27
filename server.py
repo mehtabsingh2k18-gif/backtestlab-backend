@@ -13,11 +13,12 @@ CORS(app)
 HF_BASE_URL = "https://huggingface.co/spaces/mehtab13/backtestlab-data/raw/main"
 
 # --- Keep-Alive Background Task ---
+# --- Updated keep_alive_task ---
 def keep_alive_task():
     while True:
-        print(f"[{datetime.datetime.now()}] 🕒 Server is alive and running.")
-        time.sleep(6) # Logs every 6 seconds
-
+        # The flush=True forces the text to appear in your logs immediately
+        print(f"[{datetime.datetime.now()}] 🕒 Server is alive and running.", flush=True)
+        time.sleep(6)
 # Start the background task
 thread = threading.Thread(target=keep_alive_task, daemon=True)
 thread.start()
